@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orion Dev</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        :root {
+            --primary: #0ea5e9;
+            --primary-dark: #0369a1;
+            --secondary: #06b6d4;
+            --dark: #0f172a;
+            --dark-light: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--dark-light);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light);
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--primary);
+        }
+
+        .logo-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: rgba(6, 182, 212, 0.15);
+            color: var(--secondary);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        /* Main Content */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--light);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .team-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+
+        /* Connect Section */
+        .connect-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .connect-card {
+            background-color: var(--dark-light);
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .connect-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .connect-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .connect-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        .connect-card p {
+            color: var(--gray);
+            margin-bottom: 25px;
+        }
+
+        .url-input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .url-input {
+            background-color: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--dark-light);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--light);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .url-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .textarea-input {
+            min-height: 120px;
+            resize: vertical;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(6, 182, 212, 0.2);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-ghost:hover {
+            background-color: rgba(14, 165, 233, 0.1);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        /* Discord Widget Area */
+        .discord-widget-area {
+            margin-top: 25px;
+            min-height: 200px;
+            background-color: rgba(15, 23, 42, 0.5);
+            border-radius: 10px;
+            border: 2px dashed rgba(148, 163, 184, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .discord-widget-area.active {
+            border: 2px solid var(--success);
+            border-style: dashed;
+        }
+
+        .widget-placeholder {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--gray);
+        }
+
+        .widget-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        .widget-placeholder h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+
+        .widget-instructions {
+            background-color: rgba(6, 182, 212, 0.1);
+            border-left: 4px solid var(--secondary);
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .widget-instructions ol {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .widget-instructions li {
+            margin-bottom: 8px;
+        }
+
+        .widget-instructions code {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+
+        .widget-preview {
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+        }
+
+        .widget-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-success {
+            background-color: var(--success);
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+        }
+
+        .btn-success:hover {
+            background-color: #0da271;
+        }
+
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+
+        /* Discord Preview */
+        .discord-preview {
+            background-color: rgba(15, 23, 42, 0.7);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid var(--dark-light);
+        }
+
+        .discord-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .discord-icon {
+            color: #5865F2;
+            font-size: 1.5rem;
+        }
+
+        .discord-members {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .discord-btn {
+            background-color: #5865F2;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        .discord-btn:hover {
+            background-color: #4752c4;
+        }
+
+        /* Projects Section */
+        .projects-placeholder {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: var(--dark-light);
+            border-radius: 12px;
+            border: 2px dashed rgba(148, 163, 184, 0.3);
+        }
+
+        .projects-placeholder i {
+            font-size: 4rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .projects-placeholder h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        .projects-placeholder p {
+            color: var(--gray);
+            max-width: 500px;
+            margin: 0 auto 25px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-light);
+            padding: 60px 0 30px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+            padding-top: 30px;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .license {
+            display: inline-block;
+            background-color: rgba(148, 163, 184, 0.1);
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .team-stats {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+            
+            .connect-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .team-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fas fa-rocket"></i>
+                    <span class="logo-text">Orion Dev</span>
+                </a>
+                
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#connect">Connect</a>
+                    <a href="#projects">Projects</a>
+                </div>
+                
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="tag">Small Team, Big Ideas</div>
+            <h1>Orion Dev</h1>
+            <p>A tight-knit team of three developers building the future of community-driven tools, Discord integrations, and open-source solutions.</p>
+            <a href="#connect" class="btn">Join Our Community</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Our Team</h2>
+            <p class="section-subtitle">We're a small but passionate group of developers focused on creating tools that enhance online communities and developer experiences.</p>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Orion Dev was founded by three developers who believe in the power of community-driven development. While we're just starting out with zero public projects yet, we're actively working behind the scenes on Discord bots, API tools, and utilities that solve real problems for developers and community managers.</p>
+                    <p>Our philosophy is simple: build useful tools, share our knowledge, and grow together with the open-source community. We're currently in the early stages, focusing on foundational projects that will form the backbone of our future offerings.</p>
+                    
+                    <div class="team-stats">
+                        <div class="stat">
+                            <div class="stat-value">3</div>
+                            <div class="stat-label">Developers</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">0</div>
+                            <div class="stat-label">Public Projects</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">∞</div>
+                            <div class="stat-label">Possibilities</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Connect Section -->
+    <section id="connect">
+        <div class="container">
+            <h2 class="section-title">Connect With Us</h2>
+            <p class="section-subtitle">Join our Discord community or check out our GitHub for future projects. We're just getting started and would love to connect with like-minded developers.</p>
+            
+            <div class="connect-cards">
+                <!-- GitHub Card -->
+                <div class="connect-card">
+                    <i class="fab fa-github"></i>
+                    <h3>GitHub Organization</h3>
+                    <p>Our future open-source projects will be hosted here. Add our GitHub URL below to bookmark our page.</p>
+                    
+                    <div class="url-input-container">
+                        <input type="text" class="url-input" id="githubUrl" placeholder="https://github.com/orion-dev" value="">
+                        <div class="widget-controls">
+                            <button class="btn btn-small" onclick="copyGitHubUrl()">Copy URL</button>
+                            <button class="btn btn-small btn-ghost" onclick="updateGitHubUrl()">Update URL</button>
+                        </div>
+                    </div>
+                    
+                    <p style="margin-top: 15px; font-size: 0.9rem; color: var(--gray);">
+                        <i class="fas fa-info-circle"></i> Once you create your GitHub org, paste the URL above.
+                    </p>
+                </div>
+                
+                <!-- Discord Card -->
+                <div class="connect-card">
+                    <i class="fab fa-discord"></i>
+                    <h3>Discord Community</h3>
+                    <p>Embed your Discord widget to show your community members and allow people to join directly.</p>
+                    
+                    <!-- Discord Widget Input -->
+                    <div class="url-input-container">
+                        <label style="color: var(--light); font-weight: 500; margin-bottom: 5px;">Discord Widget HTML Code:</label>
+                        <textarea class="url-input textarea-input" id="discordWidgetCode" placeholder='<iframe src="https://discord.com/widget?id=YOUR_SERVER_ID&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>'></textarea>
+                        
+                        <div class="widget-instructions">
+                            <strong>How to get your Discord Widget:</strong>
+                            <ol>
+                                <li>Go to your Discord Server Settings → Widget</li>
+                                <li>Enable Server Widget</li>
+                                <li>Copy the HTML embed code</li>
+                                <li>Paste it in the box above</li>
+                            </ol>
+                            <p>Your widget will look like: <code>&lt;iframe src="https://discord.com/widget?id=YOUR_SERVER_ID&theme=dark" ...&gt;&lt;/iframe&gt;</code></p>
+                        </div>
+                        
+                        <div class="widget-controls">
+                            <button class="btn btn-small btn-success" onclick="embedDiscordWidget()">Embed Widget</button>
+                            <button class="btn btn-small btn-ghost" onclick="previewDiscordWidget()">Preview</button>
+                            <button class="btn btn-small btn-danger" onclick="clearDiscordWidget()">Clear</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Discord Widget Display Area -->
+                    <div class="discord-widget-area" id="discordWidgetArea">
+                        <div class="widget-placeholder" id="widgetPlaceholder">
+                            <i class="fab fa-discord"></i>
+                            <h4>No Discord Widget Embedded</h4>
+                            <p>Paste your Discord widget code above and click "Embed Widget"</p>
+                        </div>
+                        <div class="widget-preview" id="widgetPreview"></div>
+                    </div>
+                    
+                    <!-- Discord Invite Link Backup -->
+                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(148, 163, 184, 0.2);">
+                        <label style="color: var(--light); font-weight: 500; display: block; margin-bottom: 10px;">Direct Invite Link (backup):</label>
+                        <input type="text" class="url-input" id="discordInviteUrl" placeholder="https://discord.gg/your-invite-code" style="margin-bottom: 10px;">
+                        <button class="btn btn-small" onclick="updateDiscordInvite()">Update Invite Link</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Our Projects</h2>
+            <p class="section-subtitle">We're currently working on our first projects. Check back soon or join our Discord to get early access and updates.</p>
+            
+            <div class="projects-placeholder">
+                <i class="fas fa-code-branch"></i>
+                <h3>Projects Coming Soon</h3>
+                <p>We're in the early development phase, working on our first set of tools and libraries. Our focus is on quality over quantity, so we're taking our time to build something truly useful.</p>
+                <p>Interested in collaborating or have a project idea? Reach out on Discord!</p>
+                <a href="#connect" class="btn">Get Involved</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-rocket"></i> Orion Dev
+                </div>
+                
+                <div class="footer-links">
+                    <a href="#about">About</a>
+                    <a href="#connect">Connect</a>
+                    <a href="#projects">Projects</a>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Orion Dev. All future projects will be released under the <span class="license">MIT License</span>.</p>
+                <p style="margin-top: 10px;">Made with <i class="fas fa-heart" style="color: #ef4444;"></i> by a team of three developers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // GitHub URL handling
+        function updateGitHubUrl() {
+            const urlInput = document.getElementById('githubUrl');
+            const url = urlInput.value.trim();
+            
+            if (url && isValidUrl(url)) {
+                urlInput.value = url;
+                showNotification('GitHub URL updated!', 'success');
+            } else {
+                showNotification('Please enter a valid URL starting with https://', 'error');
+            }
+        }
+
+        function copyGitHubUrl() {
+            const urlInput = document.getElementById('githubUrl');
+            const url = urlInput.value.trim();
+            
+            if (url && isValidUrl(url)) {
+                navigator.clipboard.writeText(url).then(() => {
+                    showNotification('GitHub URL copied to clipboard!', 'success');
+                });
+            } else {
+                showNotification('Please enter a valid GitHub URL first', 'error');
+            }
+        }
+
+        // Discord Widget Handling
+        function embedDiscordWidget() {
+            const widgetCode = document.getElementById('discordWidgetCode').value.trim();
+            const widgetPreview = document.getElementById('widgetPreview');
+            const widgetPlaceholder = document.getElementById('widgetPlaceholder');
+            const widgetArea = document.getElementById('discordWidgetArea');
+            
+            if (!widgetCode) {
+                showNotification('Please paste your Discord widget code first', 'error');
+                return;
+            }
+            
+            // Basic validation for iframe code
+            if (!widgetCode.includes('<iframe') || !widgetCode.includes('discord.com/widget')) {
+                showNotification('Please paste a valid Discord widget iframe code', 'error');
+                return;
+            }
+            
+            // Clear previous content
+            widgetPreview.innerHTML = '';
+            
+            // Create a container for the iframe
+            const iframeContainer = document.createElement('div');
+            iframeContainer.innerHTML = widgetCode;
+            
+            // Add the iframe to the preview
+            widgetPreview.appendChild(iframeContainer);
+            
+            // Show preview and hide placeholder
+            widgetPreview.style.display = 'block';
+            widgetPlaceholder.style.display = 'none';
+            widgetArea.classList.add('active');
+            
+            // Save to localStorage
+            localStorage.setItem('orionDevDiscordWidget', widgetCode);
+            
+            showNotification('Discord widget embedded successfully!', 'success');
+        }
+
+        function previewDiscordWidget() {
+            const widgetCode = document.getElementById('discordWidgetCode').value.trim();
+            
+            if (!widgetCode) {
+                showNotification('No widget code to preview', 'error');
+                return;
+            }
+            
+            // Open a new window with the widget
+            const previewWindow = window.open('', 'Discord Widget Preview', 'width=500,height=600,scrollbars=yes');
+            previewWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Discord Widget Preview</title>
+                    <style>
+                        body { 
+                            margin: 0; 
+                            padding: 20px; 
+                            background: #0f172a; 
+                            color: white; 
+                            font-family: sans-serif; 
+                            text-align: center;
+                        }
+                        h2 { color: #5865F2; }
+                        .container { 
+                            display: flex; 
+                            flex-direction: column; 
+                            align-items: center; 
+                            gap: 20px; 
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <h2>Discord Widget Preview</h2>
+                        <p>This is how your widget will appear on the site:</p>
+                        ${widgetCode}
+                        <p style="margin-top: 20px; color: #94a3b8; font-size: 0.9rem;">
+                            Close this window when done previewing.
+                        </p>
+                    </div>
+                </body>
+                </html>
+            `);
+            previewWindow.document.close();
+        }
+
+        function clearDiscordWidget() {
+            const widgetCode = document.getElementById('discordWidgetCode');
+            const widgetPreview = document.getElementById('widgetPreview');
+            const widgetPlaceholder = document.getElementById('widgetPlaceholder');
+            const widgetArea = document.getElementById('discordWidgetArea');
+            
+            widgetCode.value = '';
+            widgetPreview.innerHTML = '';
+            widgetPreview.style.display = 'none';
+            widgetPlaceholder.style.display = 'block';
+            widgetArea.classList.remove('active');
+            
+            localStorage.removeItem('orionDevDiscordWidget');
+            
+            showNotification('Discord widget cleared', 'info');
+        }
+
+        function updateDiscordInvite() {
+            const urlInput = document.getElementById('discordInviteUrl');
+            const url = urlInput.value.trim();
+            
+            if (url && isValidUrl(url)) {
+                // Save to localStorage
+                localStorage.setItem('orionDevDiscordInvite', url);
+                showNotification('Discord invite link saved!', 'success');
+            } else {
+                showNotification('Please enter a valid Discord invite URL', 'error');
+            }
+        }
+
+        // Helper function to validate URLs
+        function isValidUrl(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+
+        // Notification system
+        function showNotification(message, type = 'info') {
+            // Remove existing notification
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            // Create new notification
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <span>${message}</span>
+                <button onclick="this.parentElement.remove()">×</button>
+            `;
+            
+            // Add styles for notification
+            const style = document.createElement('style');
+            style.textContent = `
+                .notification {
+                    position: fixed;
+                    top: 100px;
+                    right: 20px;
+                    padding: 15px 20px;
+                    border-radius: 8px;
+                    color: white;
+                    font-weight: 500;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    min-width: 300px;
+                    max-width: 400px;
+                    z-index: 9999;
+                    animation: slideIn 0.3s ease;
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                }
+                .notification-success { background: #10b981; }
+                .notification-error { background: #ef4444; }
+                .notification-info { background: #3b82f6; }
+                .notification button {
+                    background: none;
+                    border: none;
+                    color: white;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    margin-left: 15px;
+                    padding: 0;
+                    line-height: 1;
+                }
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            
+            document.head.appendChild(style);
+            document.body.appendChild(notification);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (window.innerWidth <= 768) {
+                        document.querySelector('.nav-links').style.display = 'none';
+                    }
+                }
+            });
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved Discord widget from localStorage
+            const savedWidget = localStorage.getItem('orionDevDiscordWidget');
+            if (savedWidget) {
+                document.getElementById('discordWidgetCode').value = savedWidget;
+                embedDiscordWidget();
+            }
+            
+            // Load saved Discord invite from localStorage
+            const savedInvite = localStorage.getItem('orionDevDiscordInvite');
+            if (savedInvite) {
+                document.getElementById('discordInviteUrl').value = savedInvite;
+            }
+            
+            // Set placeholder GitHub URL
+            document.getElementById('githubUrl').placeholder = 'https://github.com/Ori-Developers';
+            
+            // Set placeholder Discord widget code
+            document.getElementById('discordWidgetCode').placeholder = '<iframe src="https://discord.com/widget?id=1451690131894308895&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>';
+        });
+    </script>
+</body>
+</html>
