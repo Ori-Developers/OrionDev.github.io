@@ -1,2 +1,2 @@
 # OrionDev.github.io
-The Official Site Files for Orion Dev
+The Official Site Files for the Orion Dev Group
